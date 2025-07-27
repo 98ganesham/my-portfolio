@@ -9,7 +9,6 @@ import {
   Button,
   HStack,
   Icon,
-  Link,
   Tooltip,
 } from "@chakra-ui/react";
 import {
@@ -31,6 +30,7 @@ import Chaw_Be_Lar2 from "../../assets/images/Chaw_Be_Lar2.jpg";
 import Chaw_Be_Lar3 from "../../assets/images/Chaw_Be_Lar3.jpg";
 import Chaw_Be_Lar4 from "../../assets/images/Chaw_Be_Lar4.jpg";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const heroCards = [
   {
@@ -248,7 +248,7 @@ export default function HeroFooter() {
               experiments, and web trends in the <strong>Hero Blog</strong>.
               It's where I document growth, learning, and creativity in code.
             </Text>
-            <Link href="/blog">
+            <Link to="/blog">
               <Button
                 size="lg"
                 px={10}
