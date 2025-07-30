@@ -11,7 +11,7 @@ import {
 import { FaDownload, FaFacebook, FaMobile } from "react-icons/fa";
 import { LiaLinkedin } from "react-icons/lia";
 import Profile from "../../assets/images/Chaw_Be_Lar_Profile-removebg-preview.png";
-import Resume from "../../assets/resumePdf/Chaw Be Lar-Computer-Cv.pdf";
+import Resume from "../../assets/resumePdf/Chaw Be Lar-Computer.pdf";
 
 const HeroHeader = () => {
   return (
