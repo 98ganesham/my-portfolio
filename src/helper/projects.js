@@ -1,5 +1,5 @@
 import Hospital from "../assets/projectImages/healthbooker/full_pic.png";
-import Ecommerce from "../assets/projectImages/ecommerce/hero_img.png";
+import Ecommerce from "../assets/projectImages/eCommerce/hero_img.png";
 import Gym from "../assets/projectImages/gym/HomePageGraphic.png";
 
 export const projects = [
