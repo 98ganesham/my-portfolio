@@ -46,20 +46,13 @@ const About = () => {
           {/* Bio Text */}
           <Box flex={1}>
             <Heading
-              mb={{ base: 4, md: 6 }}
-              fontSize={{ base: "28px", md: "32px", lg: "40px" }}
-              fontWeight="700"
-              lineHeight={{ base: "1.2", md: "1.25" }}
+              fontSize={{ base: "2xl", md: "3xl", lg: "4xl" }}
+              fontWeight="semibold"
+              fontFamily="monospace"
+              lineHeight="short"
+              mb={4}
             >
-              <Text
-                color="transparent"
-                bgGradient="linear(to-r, #828282 20%, #87CEFA 80%)"
-                bgClip={"text"}
-                fontWeight="bold"
-                as="heading"
-              >
-                Meet the Developer
-              </Text>
+              Meet the Developer
             </Heading>
 
             <Text fontSize={{ base: "18px", md: "20px", lg: "22" }} mb={5}>

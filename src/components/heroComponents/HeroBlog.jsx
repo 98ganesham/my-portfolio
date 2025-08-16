@@ -9,8 +9,15 @@ import {
   Container,
   Button,
   useColorModeValue,
+  Divider,
 } from "@chakra-ui/react";
-import { FaPenNib, FaCode, FaRocket, FaGithub } from "react-icons/fa";
+import {
+  FaPenNib,
+  FaCode,
+  FaRocket,
+  FaGithub,
+  FaArrowRight,
+} from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const blogPosts = [
@@ -18,7 +25,7 @@ const blogPosts = [
     title: "How I Built My First Portfolio Website",
     icon: FaCode,
     excerpt:
-      "A deep dive into the tools, mistakes, and lessons I learned building my first developer portfolio.",
+      "From idea to deployment — the exact steps, tools, and lessons that shaped my journey into professional web development.",
     link: "#",
     github: "https://github.com/98ganesham/HTML-CSS",
   },
@@ -26,7 +33,7 @@ const blogPosts = [
     title: "Understanding Flexbox: The Visual Guide I Wish I Had",
     icon: FaPenNib,
     excerpt:
-      "CSS Flexbox can be confusing. Here's a simple, visual approach to mastering layout fundamentals.",
+      "Forget the jargon. A clear, visual explanation of Flexbox with real-world use cases you can apply today.",
     link: "#",
     github: "https://github.com/98ganesham/CodeWithMosh-React",
   },
@@ -34,15 +41,14 @@ const blogPosts = [
     title: "30 Days of Code: What I Learned",
     icon: FaRocket,
     excerpt:
-      "I committed to coding daily for a month. Here's what changed in my skills and mindset.",
+      "One month, one challenge: coding every day. The growth, struggles, and how consistency builds real skill.",
     link: "#",
     github: null,
   },
 ];
 
-const BlogCard = ({ title, icon, excerpt, github }) => {
-  const bg = useColorModeValue("white", "gray.800");
-  const hoverBg = useColorModeValue("gray.50", "gray.700");
+const BlogCard = ({ title, icon, excerpt, github, link }) => {
+  const bg = useColorModeValue("white", "gray.900");
 
   const handleGitHubRedirect = (e) => {
     e.preventDefault();
@@ -52,28 +58,51 @@ const BlogCard = ({ title, icon, excerpt, github }) => {
   return (
     <Box
       bg={bg}
-      p={6}
+      p={8}
       rounded="2xl"
-      shadow="lg"
-      transition="all 0.3s"
-      _hover={{ bg: hoverBg, transform: "translateY(-5px)" }}
+      shadow="xl"
+      border="1px solid"
+      borderColor={useColorModeValue("gray.200", "gray.700")}
+      transition="all 0.3s ease"
+      _hover={{ transform: "translateY(-8px)", shadow: "2xl" }}
+      h="100%"
+      display="flex"
+      flexDirection="column"
+      justifyContent="space-between"
     >
-      <HStack spacing={4} mb={4} color="#87CEFA">
-        <Icon as={icon} boxSize={6} />
-        <Heading fontSize="xl">{title}</Heading>
-      </HStack>
-      <Text mb={4}>{excerpt}</Text>
-      <HStack spacing={4}>
+      <Box>
+        <HStack spacing={4} mb={4} color="#87CEFA">
+          <Icon as={icon} boxSize={6} />
+          <Heading fontSize="xl">{title}</Heading>
+        </HStack>
+        <Text fontSize="md" color={useColorModeValue("gray.600", "gray.300")}>
+          {excerpt}
+        </Text>
+      </Box>
+
+      <HStack spacing={4} mt={6} justify="space-between">
         {github && (
-          <Link to="#" onClick={handleGitHubRedirect}>
+          <Box as="button" onClick={handleGitHubRedirect}>
             <Icon
               as={FaGithub}
               boxSize={6}
-              color="gray.600"
+              color="gray.500"
               _hover={{ color: "#87CEFA" }}
             />
-          </Link>
+          </Box>
         )}
+        <Link to={link || "#"}>
+          <Button
+            size="sm"
+            rightIcon={<FaArrowRight />}
+            bg="#87CEFA"
+            color="black"
+            fontWeight="600"
+            _hover={{ bg: "#4682B4", color: "white" }}
+          >
+            Read More
+          </Button>
+        </Link>
       </HStack>
     </Box>
   );
@@ -81,15 +110,26 @@ const BlogCard = ({ title, icon, excerpt, github }) => {
 
 const HeroBlog = () => {
   return (
-    <Box py={16}>
-      <Container maxW="6xl">
-        <VStack spacing={4} mb={12} textAlign="center">
-          <Heading as="h1" fontSize="4xl">
-            📝 My Developer Blog
+    <Box py={20} px={6} bg={useColorModeValue("gray.50", "gray.800")}>
+      <Container maxW="7xl">
+        <VStack spacing={6} mb={14} textAlign="center">
+          <Heading
+            as="h1"
+            fontSize={{ base: "3xl", md: "5xl" }}
+            fontWeight="bold"
+          >
+            📝 Insights, Stories & Code
           </Heading>
-          <Text fontSize="lg">
-            Sharing what I learn, build, and discover as a junior web developer.
+          <Text
+            fontSize={{ base: "md", md: "lg" }}
+            maxW="3xl"
+            color={useColorModeValue("gray.600", "gray.300")}
+          >
+            Whether you’re a company leader, recruiter, developer, or just
+            starting your coding journey — my blog shares practical lessons,
+            real projects, and experiences that can inspire and guide.
           </Text>
+          <Divider borderColor="gray.400" />
         </VStack>
 
         <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={10}>
@@ -98,10 +138,18 @@ const HeroBlog = () => {
           ))}
         </SimpleGrid>
 
-        <Box>
+        <Box textAlign="center" mt={12}>
           <Link to="/">
-            <Button mt={8} bg="#87CEFA">
-              Back To Home
+            <Button
+              size="lg"
+              px={10}
+              rounded="full"
+              bg="#87CEFA"
+              color="black"
+              fontWeight="bold"
+              _hover={{ bg: "#4682B4", color: "white" }}
+            >
+              ⬅ Back To Home
             </Button>
           </Link>
         </Box>

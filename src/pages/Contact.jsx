@@ -1,5 +1,3 @@
-// Contact.jsx
-
 import React, { useRef, useState } from "react";
 import {
   Box,
@@ -9,12 +7,11 @@ import {
   Input,
   Textarea,
   VStack,
-  useToast,
   Heading,
   Text,
   Flex,
+  useToast,
 } from "@chakra-ui/react";
-import emailjs from "@emailjs/browser";
 import PaddingBox from "../assets/frame/PaddingBox";
 
 const Contact = () => {
@@ -26,31 +23,42 @@ const Contact = () => {
     e.preventDefault();
     setLoading(true);
 
-    try {
-      await emailjs.sendForm(
-        "service_qbxyu4f", // <-- Replace with your EmailJS service ID
-        "template_y82wytf", // <-- Replace with your template ID
-        formRef.current,
-        "Wo1LfvbwzhV3ao6UB" // <-- Replace with your public key
-      );
+    const formData = new FormData(formRef.current);
 
-      toast({
-        title: "Message sent!",
-        description: "Thanks for contacting me — I’ll get back to you soon.",
-        status: "success",
-        duration: 5000,
-        isClosable: true,
+    try {
+      const response = await fetch("https://formspree.io/f/xzzvwlkk", {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: formData,
       });
 
-      formRef.current.reset();
-    } catch (e) {
+      if (response.ok) {
+        toast({
+          title: "Message sent!",
+          description: "Thanks for contacting me — I’ll get back to you soon.",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
+        formRef.current.reset();
+      } else {
+        toast({
+          title: "Error sending message.",
+          description: "Please try again later.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      }
+    } catch (err) {
       toast({
         title: "Error sending message.",
         description: "Please try again later.",
-        status: e.response ? "error" : "warning",
+        status: "error",
         duration: 5000,
         isClosable: true,
       });
+      console.error(err);
     }
 
     setLoading(false);
@@ -58,129 +66,137 @@ const Contact = () => {
 
   return (
     <PaddingBox>
-      <Box
-        border="5px solid #87CEFA"
-        maxW={"fit-content"}
-        mt={10}
-        mx="auto"
-        borderRadius={"24px"}
-        boxShadow={"lg"}
-      >
-        {/* Gradient Heading */}
+      <Box maxW="6xl" mx="auto" py={{ base: 10, md: 16 }}>
         <Heading
-          m={{ base: 4, md: 6 }}
-          fontSize={{ base: "28px", md: "32px", lg: "40px" }}
-          fontWeight="700"
-          lineHeight={{ base: "1.2", md: "1.25" }}
+          fontSize={{ base: "2xl", md: "3xl", lg: "4xl" }}
+          fontWeight="semibold"
+          fontFamily="monospace"
+          lineHeight="short"
           textAlign="center"
+          mb={4}
         >
-          <Text
-            color="transparent"
-            bgGradient="linear(to-r, #828282 20%, #87CEFA 80%)"
-            bgClip="text"
-            fontWeight="bold"
-          >
-            Contact Me
-          </Text>
+          Get in Touch
         </Heading>
+        <Text textAlign="center" fontSize="md" mb={10} color="gray.500">
+          Have a project in mind, collaboration, or just want to say hi? Drop me
+          a message below.
+        </Text>
 
-        {/* Form */}
-        <Box p={4} as="form" ref={formRef} onSubmit={sendEmail}>
-          <VStack
-            borderRadius={"14px"}
-            boxShadow={"2xl"}
-            p={8}
-            spacing={5}
-            align="stretch"
-            bg="whiteAlpha.100"
+        <Flex
+          gap={10}
+          direction={{ base: "column", md: "row" }}
+          align="stretch"
+        >
+          {/* Left Info */}
+          <Box
+            flex="1"
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            gap={6}
           >
-            <FormControl isRequired>
-              <Flex align="center">
-                <FormLabel mb="0" minWidth="35%">
-                  Your Name
-                </FormLabel>
-                <Input type="text" name="user_name" placeholder="John Doe" />
-              </Flex>
-            </FormControl>
+            <Text fontSize="lg" fontWeight="semibold">
+              Let’s build something amazing 🚀
+            </Text>
+            <Text color="gray.600">
+              I’m always open to new opportunities, freelance work, or
+              interesting discussions. I am available to work anywhere in
+              Thailand, on-site, with room provided. Feel free to reach out!
+            </Text>
+            <Box fontSize="sm" color="gray.500">
+              <Text>
+                <strong>Email:</strong> chawbelar98@gmail.com
+              </Text>
+              <Text>
+                <strong>Phone:</strong> +66 628 131 975
+              </Text>
+              <Text>
+                <strong>Location:</strong> 198, 202 Patthana Chonabot 3 Rd,
+                Khlong Song Ton Nun, Lat Krabang, Bangkok 10520
+              </Text>
+            </Box>
+          </Box>
 
-            <FormControl isRequired>
-              <Flex align="center">
-                <FormLabel mb="0" minWidth="35%">
-                  Email Address
-                </FormLabel>
-                <Input
-                  type="email"
-                  name="user_email"
-                  placeholder="you@example.com"
-                />
-              </Flex>
-            </FormControl>
-
-            <FormControl isRequired>
-              <Flex align="center">
-                <FormLabel mb="0" minWidth="35%">
-                  Phone Number
-                </FormLabel>
-                <Input type="tel" name="user_phone" placeholder="+1234567890" />
-              </Flex>
-            </FormControl>
-
-            <FormControl isRequired>
-              <Flex align="center">
-                <FormLabel mb="0" minWidth="35%">
-                  Address
-                </FormLabel>
+          {/* Right Form */}
+          <Box
+            flex="1.5"
+            as="form"
+            ref={formRef}
+            onSubmit={sendEmail}
+            bg="whiteAlpha.50"
+            backdropFilter="blur(12px)"
+            p={{ base: 6, md: 8 }}
+            borderRadius="2xl"
+            boxShadow="lg"
+            transition="all 0.3s ease"
+            _hover={{ boxShadow: "xl", transform: "translateY(-3px)" }}
+          >
+            <VStack spacing={5} align="stretch">
+              <FormControl isRequired>
+                <FormLabel>Your Name</FormLabel>
                 <Input
                   type="text"
-                  name="user_address"
-                  placeholder="Your full address"
+                  name="name"
+                  placeholder="John Doe"
+                  focusBorderColor="#87CEFA"
                 />
-              </Flex>
-            </FormControl>
+              </FormControl>
 
-            <FormControl isRequired>
-              <Flex align="center">
-                <FormLabel mb="0" minWidth="35%">
-                  Subject
-                </FormLabel>
+              <FormControl isRequired>
+                <FormLabel>Email Address</FormLabel>
+                <Input
+                  type="email"
+                  name="email"
+                  placeholder="you@example.com"
+                  focusBorderColor="#87CEFA"
+                />
+              </FormControl>
+
+              <FormControl>
+                <FormLabel>Phone Number</FormLabel>
+                <Input
+                  type="tel"
+                  name="phone"
+                  placeholder="+1234567890"
+                  focusBorderColor="#87CEFA"
+                />
+              </FormControl>
+
+              <FormControl>
+                <FormLabel>Subject</FormLabel>
                 <Input
                   type="text"
                   name="subject"
                   placeholder="Project discussion, hiring..."
+                  focusBorderColor="#87CEFA"
                 />
-              </Flex>
-            </FormControl>
+              </FormControl>
 
-            <FormControl isRequired>
-              <Flex align="flex-start">
-                <FormLabel mt="2" minWidth="35%">
-                  Your Message
-                </FormLabel>
+              <FormControl isRequired>
+                <FormLabel>Your Message</FormLabel>
                 <Textarea
                   name="message"
-                  rows={6}
+                  rows={5}
                   placeholder="How can I help you?"
-                  flex="1"
+                  focusBorderColor="#87CEFA"
                 />
-              </Flex>
-            </FormControl>
+              </FormControl>
 
-            <Button
-              type="submit"
-              bg="#87CEFA"
-              color={"black"}
-              fontWeight="bold"
-              px={8}
-              py={6}
-              rounded="full"
-              isLoading={loading}
-              _hover={{ bg: "#1877F2" }}
-              width="100%"
-            >
-              Send Message
-            </Button>
-          </VStack>
-        </Box>
+              <Button
+                type="submit"
+                bg="#87CEFA"
+                color="black"
+                fontWeight="bold"
+                py={6}
+                rounded="full"
+                isLoading={loading}
+                _hover={{ bg: "#4682B4", color: "white" }}
+              >
+                Send Message
+              </Button>
+            </VStack>
+          </Box>
+        </Flex>
       </Box>
     </PaddingBox>
   );

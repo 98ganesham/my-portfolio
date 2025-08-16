@@ -11,7 +11,7 @@ const customTheme = extendTheme({
   },
   colors: {
     brand: {
-      500: "#EEBF63", // your accent color
+      500: "#4682B4", // your accent color
     },
   },
   components: {

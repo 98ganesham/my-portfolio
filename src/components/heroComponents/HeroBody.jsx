@@ -6,7 +6,6 @@ import {
   Image,
   SimpleGrid,
   Text,
-  useColorModeValue,
 } from "@chakra-ui/react";
 import { FaArrowRight, FaInfoCircle } from "react-icons/fa";
 import { BsPlay } from "react-icons/bs";
@@ -16,9 +15,6 @@ import EcommerceImage from "../../assets/projectImages/eCommerce/hero_img.png";
 import GymImage from "../../assets/projectImages/gym/HomePageGraphic.png";
 
 const HeroBody = () => {
-  const cardBg = useColorModeValue("white", "gray.800");
-  const textColor = useColorModeValue("gray.600", "gray.300");
-
   const projects = [
     {
       title: "E-commerce Website",
@@ -38,102 +34,95 @@ const HeroBody = () => {
     },
   ];
 
-  const handleExternalLink = (url) => (e) => {
-    e.preventDefault();
-    window.open(url, "_blank", "noopener,noreferrer");
-  };
-
   return (
-    <Box mt={{ base: 8, md: 12, lg: 15 }} maxW={"100%"}>
-      <Box
-        display={"flex"}
-        justifyContent={"space-between"}
-        mb={12}
-        width={"100%"}
-      >
-        <Heading fontSize="2xl">🚀 Recent Projects</Heading>
+    <Box mt={{ base: 8, md: 12, lg: 16 }}>
+      {/* Section Header */}
+      <Flex justify="space-between" align="center" mb={12} flexWrap="wrap">
+        <Heading fontSize={{ base: "xl", md: "2xl" }}>
+          🚀 Recent Projects
+        </Heading>
         <Link to="/project">
           <Button
             rightIcon={<FaArrowRight />}
             bg="#87CEFA"
-            _hover={{ bg: "#828282" }}
+            _hover={{ bg: "#4682B4", color: "white" }}
             fontWeight="600"
             size="md"
+            mt={{ base: 4, md: 0 }}
           >
             View More
           </Button>
         </Link>
-      </Box>
+      </Flex>
 
+      {/* Project Cards */}
       <SimpleGrid columns={{ base: 1, md: 2 }} spacing={8}>
         {projects.map((project, index) => (
           <Box
             key={index}
-            bg={cardBg}
+            bg="white"
             borderRadius="xl"
             boxShadow="md"
             transition="all 0.3s ease"
-            _hover={{ boxShadow: "xl", transform: "translateY(-4px)" }}
+            _hover={{ boxShadow: "xl", transform: "translateY(-6px)" }}
             overflow="hidden"
+            minH="440px" // equal card height
+            display="flex"
+            flexDirection="column"
           >
-            <Image
-              src={project.img}
-              alt={project.title}
-              objectFit="cover"
+            {/* Image */}
+            <Box
+              h="220px"
               w="100%"
-              h="fit"
-              borderTopRadius="20px"
-            />
-            <Box p={4}>
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              bg="gray.50"
+            >
+              <Image
+                src={project.img}
+                alt={project.title}
+                objectFit="contain" // show entire image, not cropped
+                maxH="100%"
+                maxW="100%"
+              />
+            </Box>
+
+            {/* Content */}
+            <Box flex="1" p={5} display="flex" flexDirection="column">
               <Heading fontSize="lg" mb={2}>
                 {project.title}
               </Heading>
-              <Text fontSize="sm" color={textColor} mb={4}>
+              <Text fontSize="sm" color="gray.600" mb={4} flex="1">
                 {project.description}
               </Text>
-              <Flex gap={4} wrap="wrap">
-                <Link
-                  to="#"
-                  onClick={handleExternalLink(project.github)}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    fontSize: "0.875rem",
-                    fontWeight: 500,
-                    color: "#319795",
-                    gap: "0.5rem",
-                    textDecoration: "none",
-                  }}
-                >
-                  <FaInfoCircle />
-                  View Code
-                </Link>
 
-                <Link
-                  to="#"
-                  onClick={handleExternalLink(project.demo)}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    fontSize: "0.875rem",
-                    fontWeight: 500,
-                    backgroundColor: "#87CEFA",
-                    color: "black",
-                    padding: "0.25rem 0.75rem",
-                    borderRadius: "0.375rem",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.target.style.backgroundColor = "#828282";
-                    e.target.style.color = "white";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.target.style.backgroundColor = "#87CEFA";
-                    e.target.style.color = "black";
-                  }}
+              {/* Actions */}
+              <Flex gap={4} mt="auto" wrap="wrap">
+                <Button
+                  as="a"
+                  href={project.github}
+                  target="_blank"
+                  leftIcon={<FaInfoCircle />}
+                  variant="outline"
+                  size="sm"
+                  fontWeight="500"
+                  _hover={{ bg: "#4682B4", borderColor: "#f7f7f7" }}
                 >
-                  <BsPlay />
+                  View Code
+                </Button>
+                <Button
+                  as="a"
+                  href={project.demo}
+                  target="_blank"
+                  leftIcon={<BsPlay />}
+                  bg="#87CEFA"
+                  size="sm"
+                  fontWeight="600"
+                  _hover={{ bg: "#4682B4", color: "white" }}
+                >
                   Live Demo
-                </Link>
+                </Button>
               </Flex>
             </Box>
           </Box>

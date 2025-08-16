@@ -37,12 +37,10 @@ const Navbar = () => {
             {/* Left - Logo */}
             <Link to="/">
               <Text
-                color="transparent"
-                bgGradient="linear(to-r, #87CEFA 60%, #828282 40%)"
-                bgClip={"text"}
-                fontWeight="bold"
-                fontStyle="italic"
-                fontSize="xl"
+                fontSize="2xl"
+                fontWeight="extrabold"
+                fontFamily="monospace"
+                color={colorMode === "light" ? "gray.800" : "white"}
               >
                 Chaw Be Lar
               </Text>
