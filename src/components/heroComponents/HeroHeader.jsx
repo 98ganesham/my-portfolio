@@ -68,7 +68,7 @@ const HeroHeader = () => {
           </Text>
           <IconButton
             as="a"
-            href="https://www.linkedin.com/in/chaw-be-lar-dahal-84b6a8356/"
+            href="https://www.linkedin.com/in/chaw-be-lar-dahal-810407382/"
             target="_blank"
             aria-label="LinkedIn"
             icon={<LiaLinkedin size={28} />}

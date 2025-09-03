@@ -36,7 +36,7 @@ const Footer = () => {
           {/* Center - Social Icons */}
           <Flex gap={6} align="center">
             <Link
-              href="https://www.linkedin.com/in/chaw-be-lar-dahal-84b6a8356/"
+              href="https://www.linkedin.com/in/chaw-be-lar-dahal-810407382/"
               isExternal
               aria-label="LinkedIn"
               _hover={{ color: "#0077B5" }}
