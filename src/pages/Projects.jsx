@@ -93,10 +93,14 @@ const ProjectCard = ({ project }) => {
         <Heading size="md">{project.name}</Heading>
 
         <Text fontSize="sm">
-          <strong>Languages:</strong> {project.languages.join(", ")}
+          <strong>Languages: {project.languages.join(", ")}</strong>
         </Text>
         <Text fontSize="sm">
           <strong>UI Libraries:</strong> {project.ui}
+        </Text>
+        <Text fontSize="sm">
+          <strong>Tools:</strong>{" "}
+          {project.tools ? project.tools.join(", ") : "—"}
         </Text>
 
         <Box mt={2}>

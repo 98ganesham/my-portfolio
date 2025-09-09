@@ -1,7 +1,7 @@
 import Hospital from "../assets/projectImages/healthbooker/full_pic.png";
 import Ecommerce from "../assets/projectImages/eCommerce/hero_img.png";
 import Gym from "../assets/projectImages/gym/HomePageGraphic.png";
-
+import CarRental from "../assets/projectImages/carRental/car_rental_img.png";
 export const projects = [
   {
     name: "Hospital Booker",
@@ -44,5 +44,29 @@ export const projects = [
       "Mobile-responsive design",
     ],
     github: "https://github.com/98ganesham/Gym",
+  },
+  {
+    name: "Car Rental Project",
+    image: CarRental,
+    languages: ["JavaScript", "React", "express"],
+    tools: [
+      "Axios",
+      "Bcrypt",
+      "Cors",
+      "Express",
+      "ImageKit",
+      "JsongWebToken",
+      "Mongoose",
+      "Multer",
+    ],
+    ui: ["Tailwindcss", "React-Hot-Toast", "Motion"],
+    features: [
+      "User registration and login",
+      "Book and manage Car Rent",
+      "JWT-based authentication",
+      "Role-based dashboards (user/owner)",
+      "Real-time toast notifications",
+    ],
+    github: "https://github.com/98ganesham/Rent_Car-fullstack",
   },
 ];
